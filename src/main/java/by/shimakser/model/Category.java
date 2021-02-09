@@ -1,5 +1,5 @@
 package by.shimakser.model;
 
 public enum Category {
-    Technology, Game, Cinema, Design, Health
+    Technology, Game, Cinema, Art, Health, Science, Travel
 }
