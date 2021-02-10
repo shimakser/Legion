@@ -1,38 +1,41 @@
-package by.shimakser.model;
+package by.shimakser.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "Message")
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private Type type;
     private Category category;
     private String name;
     private String author;
     private LocalDate date;
     private String mainText;
+    private Integer views;
 
-    public Integer getId() {
+    public Message() {}
+
+    public Message(Type type, Category category, String name, String author, LocalDate date, String mainText, Integer views) {
+        this.type = type;
+        this.category = category;
+        this.name = name;
+        this.author = author;
+        this.date = date;
+        this.mainText = mainText;
+        this.views = views;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Type getType() {
@@ -41,6 +44,14 @@ public class Message {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -75,6 +86,13 @@ public class Message {
         this.mainText = mainText;
     }
 
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
+    }
 }
 
 

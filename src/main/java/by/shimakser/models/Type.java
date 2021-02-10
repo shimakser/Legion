@@ -1,4 +1,4 @@
-package by.shimakser.model;
+package by.shimakser.models;
 
 public enum Type {
     Post, News, Stream

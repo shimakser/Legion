@@ -5,15 +5,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
+public class LogInController {
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public String welcomePage(Model model) {
-        return "welcome";
+        return "login";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/register")
     public String mainPage(Model model) {
-        return "main";
+        return "register";
     }
 }
