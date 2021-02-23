@@ -1,6 +1,7 @@
 package by.shimakser.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -10,6 +11,11 @@ public class User {
     private Long id;
     private String username;
     private String password;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "Roles", joinColumns = @JoinColumn(name = "roleId"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -33,5 +39,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

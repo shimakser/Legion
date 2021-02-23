@@ -2,10 +2,11 @@ package by.shimakser.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
-@Table(name = "Message")
-public class Message {
+@Table(name = "Post")
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,16 +19,14 @@ public class Message {
     private String mainText;
     private Integer views;
 
-    public Message() {}
+    public Post() {}
 
-    public Message(Type type, Category category, String name, String author, LocalDate date, String mainText, Integer views) {
+    public Post(Type type, Category category, String name, String author, String mainText) {
         this.type = type;
         this.category = category;
         this.name = name;
         this.author = author;
-        this.date = date;
         this.mainText = mainText;
-        this.views = views;
     }
 
     public Long getId() {
