@@ -11,9 +11,4 @@ public class MainController {
     public String welcomePage(Model model) {
         return "welcome";
     }
-
-    @GetMapping("/main")
-    public String mainPage(Model model) {
-        return "main";
-    }
 }

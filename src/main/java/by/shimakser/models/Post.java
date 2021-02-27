@@ -11,21 +11,18 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Type type;
-    private Category category;
-    private String name;
-    private String author;
-    private LocalDate date;
+    //private Category category;
+    private String title;
+    private String anons;
     private String mainText;
-    private Integer views;
+    private int views;
 
-    public Post() {}
+    public Post() {
+    }
 
-    public Post(Type type, Category category, String name, String author, String mainText) {
-        this.type = type;
-        this.category = category;
-        this.name = name;
-        this.author = author;
+    public Post(String title, String anons, String mainText) {
+        this.title = title;
+        this.anons = anons;
         this.mainText = mainText;
     }
 
@@ -37,44 +34,20 @@ public class Post {
         this.id = id;
     }
 
-    public Type getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getAnons() {
+        return anons;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setAnons(String anons) {
+        this.anons = anons;
     }
 
     public String getMainText() {
@@ -85,11 +58,11 @@ public class Post {
         this.mainText = mainText;
     }
 
-    public Integer getViews() {
+    public int getViews() {
         return views;
     }
 
-    public void setViews(Integer views) {
+    public void setViews(int views) {
         this.views = views;
     }
 }
