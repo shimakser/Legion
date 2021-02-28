@@ -11495,50 +11495,25 @@
 </head>
 
 <body>
-<div class="container">
-    <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4 pt-1">
-                <a class="link-secondary" href="/main">Настройки</a>
-            </div>
-            <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="#">Legion</a>
-            </div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="link-secondary" href="#" aria-label="Search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
-                         viewBox="0 0 24 24"><title>Search</title>
-                        <circle cx="10.5" cy="10.5" r="7.5"/>
-                        <path d="M21 21l-5.2-5.2"/>
-                    </svg>
-                </a>
-                <a class="btn btn-sm btn-outline-secondary" href="#">Профиль</a>
-            </div>
-        </div>
-    </header>
-    <hr class="nav d-flex justify-content-between">
-</div>
+<header th:insert="blocks/header :: header"></header>
 
 <main class="container">
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
         <div class="col-md-6 px-0" style="margin:0 auto;">
             <h1 class="display-4 font-weight-bold" align="center">Добовление поста</h1>
             <hr style="background-color: white;">
-            <form action="/main/add" method="post">
-                <input type="text" name="title" placeholder="Название поста" class="form-control">
-                <input type="text" name="anons" placeholder="Анонс" class="form-control">
-                <input type="text" name="fullText" placeholder="Текст поста" class="form-control">
-            </form>
+            <form align="center" th:action="@{/main/adding}" method="post">
+                <input type="text" name="title" placeholder="Название поста" class="form-control"><br>
+                <input type="text" name="anons" placeholder="Анонс" class="form-control"><br>
+                <input type="text" name="mainText" placeholder="Текст поста" class="form-control">
             <hr style="background-color: white;">
-            <p class="lead mb-0" align="center"><a class="btnsign btn btn-sm btn-outline-secondary text-white font-weight-bold" style="font-size: 15pt;" href="/login">Создать</a></p>
+                <button class="btnsign btn btn-sm btn-outline-secondary text-white font-weight-bold" style="font-size: 15pt;"
+                        type="submit">Создать</button>
+            </form>
         </div>
     </div>
-</main>
-<br>
-<footer class="blog-footer">
-    <p>Belarus, Vitebsk, 2021</p>
-    <p>by Shimakser</p>
-</footer>
+</main><br>
+
+<div th:insert="blocks/footer :: footer"></div>
 </body>
 </html>

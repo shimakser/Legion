@@ -11,4 +11,5 @@ public class MainController {
     public String welcomePage(Model model) {
         return "welcome";
     }
+
 }
