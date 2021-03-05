@@ -26,12 +26,12 @@ public class BlogController {
         return "main";
     }
 
-    @GetMapping("/main/adding")
+    @GetMapping("/main/add")
     public String addingPage(Model model) {
-        return "adding";
+        return "add";
     }
 
-    @PostMapping("/main/adding")
+    @PostMapping("/main/add")
     public String postAdd(@RequestParam String title, @RequestParam String anons, @RequestParam String mainText, Model model) {
         Post post = new Post(title, anons, mainText);
         postRepository.save(post);
@@ -39,7 +39,7 @@ public class BlogController {
     }
 
     @GetMapping("/main/{id}")
-    public String blogDetails(@PathVariable(value = "id") long id, Model model) {
+    public String fullPost(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/main";
         }
@@ -52,6 +52,36 @@ public class BlogController {
         ArrayList<Post> res = new ArrayList<>();
         post.ifPresent(res::add);
         model.addAttribute("post", res);
+        model.addAttribute("title", post2.getTitle());
         return "post";
+    }
+
+    @PostMapping("/main/{id}/delete")
+    public String postDelete(@PathVariable(value = "id") long id, Model model) {
+        Post post = postRepository.findById(id).orElseThrow();
+        postRepository.delete(post);
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main/{id}/edit")
+    public String postEdit(@PathVariable(value = "id") long id, Model model) {
+        if (!postRepository.existsById(id)) {
+            return "redirect:/main";
+        }
+        Optional<Post> post = postRepository.findById(id);
+        ArrayList<Post> res = new ArrayList<>();
+        post.ifPresent(res::add);
+        model.addAttribute("post", res);
+        return "edit";
+    }
+
+    @PostMapping("/main/{id}/edit")
+    public String postUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String anons, @RequestParam String mainText, Model model) {
+        Post post = postRepository.findById(id).orElseThrow();
+        post.setTitle(title);
+        post.setAnons(anons);
+        post.setMainText(mainText);
+        postRepository.save(post);
+        return "redirect:/main";
     }
 }

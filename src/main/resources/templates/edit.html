@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="${title}"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Editing</title>
+
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <style type="text/css">
         /* stylelint-disable selector-list-comma-newline-after */
@@ -11491,25 +11491,23 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 
-<main class="container" th:each="el : ${post}">
-    <div class="row">
-        <h3 class="mb-0" th:text="${el.title}"></h3><br>
-        <p class="mb-auto" th:text="${el.mainText}"></p><br>
-        <table width="100%">
-            <tr>
-                <td align="right">
-                    <b>👁</b>
-                    <a th:text=" ${el.views}"/>
-                </td>
-            </tr>
-        </table>
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-6 px-0" style="margin:0 auto;">
+            <h1 class="display-4 font-weight-bold" align="center">Редактирование поста</h1>
+            <hr style="background-color: white;">
+            <div th:each="el : ${post}">
+                <form align="center" method="post">
+                    <input type="text" th:value="${el.title}" name="title" placeholder="Название поста" class="form-control"><br>
+                    <input type="text" th:value="${el.anons}" name="anons" placeholder="Анонс" class="form-control"><br>
+                    <textarea type="text" name="mainText" placeholder="Текст поста" class="form-control" th:text="${el.mainText}" />
+                    <hr style="background-color: white;">
+                    <button class="btnsign btn btn-sm btn-outline-secondary text-white font-weight-bold" style="font-size: 15pt;"
+                            type="submit">Обновить</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <br><p>
-            <a class="btn btn-primary" th:href="'/main/' + ${el.id} + '/edit'" role="button">Редактировать</a>
-            <form method="post" th:action="'/main/' + ${el.id} + '/delete'">
-                <button class="btn btn-primary" role="button" type="submit">Удалить</button>
-            </form>
-    </p>
 </main><br>
 
 <div th:insert="blocks/footer :: footer"></div>

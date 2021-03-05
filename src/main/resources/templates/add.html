@@ -3,14 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Legion</title>
+    <title>New Post!</title>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-            crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <style type="text/css">
         /* stylelint-disable selector-list-comma-newline-after */
@@ -11502,10 +11496,10 @@
         <div class="col-md-6 px-0" style="margin:0 auto;">
             <h1 class="display-4 font-weight-bold" align="center">Добовление поста</h1>
             <hr style="background-color: white;">
-            <form align="center" th:action="@{/main/adding}" method="post">
+            <form align="center" th:action="@{/main/add}" method="post">
                 <input type="text" name="title" placeholder="Название поста" class="form-control"><br>
                 <input type="text" name="anons" placeholder="Анонс" class="form-control"><br>
-                <input type="text" name="mainText" placeholder="Текст поста" class="form-control">
+                <textarea type="text" name="mainText" placeholder="Текст поста" class="form-control"></textarea>
             <hr style="background-color: white;">
                 <button class="btnsign btn btn-sm btn-outline-secondary text-white font-weight-bold" style="font-size: 15pt;"
                         type="submit">Создать</button>
