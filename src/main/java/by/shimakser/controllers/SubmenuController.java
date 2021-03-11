@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class SubMenu {
+public class SubmenuController {
 
     @GetMapping("/settings")
     public String settingsPage(Model model) {

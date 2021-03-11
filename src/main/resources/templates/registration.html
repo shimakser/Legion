@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Зарегистрироваться</title>
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
   <style type="text/css">
@@ -175,25 +175,13 @@ body {
 </head>
 
 <body class="text-center">
-  <form class="form-signin">
-    <img class="mb-4" src="/src/main/resources/static/img/TLfG.jpg" alt="" width="200" height="200">
+  <form class="form-signin" th:action="@{/registration}" method="post">
+    <img class="mb-4" src="https://i.redd.it/fsal3ipywty21.png" width="200" height="200">
     <h1 class="h3 mb-3 font-weight-normal">Введите необходимые данные</h1>
-    <input type="email" id="inputNickname" class="form-control" placeholder="Никнейм" required autofocus>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Почта" required>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-    
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <a type="button" class="btn btn-outline-primary" href="/login">Войти</a>
-      <a type="button" class="btn btn-primary" href="/register">Зарегистрироваться</a>
-    </div>
-    
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Запомнить меня
-      </label>
-    </div>
-    <a type="button" class="btn btn-lg btn-primary btn-block" href="#">Зарегистрироваться</a>
+    <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Логин" required="" autofocus="">
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required="">
 
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Зарегистрироваться</button>
   </form>
 </body>
 </html>

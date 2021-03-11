@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users")
-public class Users {
+@Table(name = "usr")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -13,7 +13,7 @@ public class Users {
     private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "Roles", joinColumns = @JoinColumn(name = "id"))
+    @CollectionTable(name = "usrole", joinColumns = @JoinColumn(name = "usid"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
