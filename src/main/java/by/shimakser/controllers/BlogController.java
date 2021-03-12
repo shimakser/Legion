@@ -1,5 +1,6 @@
 package by.shimakser.controllers;
 
+import by.shimakser.models.Category;
 import by.shimakser.models.Post;
 import by.shimakser.repo.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class BlogController {
@@ -32,10 +32,19 @@ public class BlogController {
     }
 
     @PostMapping("/main/add")
-    public String postAdd(@RequestParam String title, @RequestParam String anons, @RequestParam String mainText, Model model) {
+    public String postAdd(@RequestParam String category, @RequestParam String title, @RequestParam String anons, @RequestParam String mainText, Model model) {
         Post post = new Post(title, anons, mainText);
+        post.setCategory(Category.valueOf(category));
         postRepository.save(post);
         return "redirect:/main";
+    }
+
+    @GetMapping("/main/posts/{category}")
+    public String sordByCategory(@PathVariable(value = "category") String category, Model model) {
+        Iterable<Post> posts = postRepository.findAllByCategory(Category.valueOf(category));
+        model.addAttribute("posts", posts);
+        model.addAttribute("categories", category);
+        return "sort";
     }
 
     @GetMapping("/main/{id}")

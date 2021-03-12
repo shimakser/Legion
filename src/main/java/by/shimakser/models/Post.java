@@ -11,16 +11,26 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //private Category category;
     private String title;
     private String anons;
     private String mainText;
     private int views;
 
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
     public Post() {
     }
 
     public Post(String title, String anons, String mainText) {
+        this.title = title;
+        this.anons = anons;
+        this.mainText = mainText;
+    }
+
+    public Post(Category category, String title, String anons, String mainText) {
+        this.category = category;
         this.title = title;
         this.anons = anons;
         this.mainText = mainText;
@@ -64,6 +74,14 @@ public class Post {
 
     public void setViews(int views) {
         this.views = views;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
 
