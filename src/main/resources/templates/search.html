@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title th:text="${categories}"/>
+    <title th:text="${titles}"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -121,7 +121,7 @@
             <div th:each="el:${posts}">
                 <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <b><a class="d-inline-block mb-2 text-primary" th:text="${el.category}" th:href="'/main/posts/' + ${el.category}"></a></b>
+                        <b><a class="d-inline-block mb-2 text-primary" th:text="${el.category}" th:href="'/main/' + ${el.category}"></a></b>
                         <h3 class="mb-0" th:text="${el.title}"></h3>
                         <p class="card-text mb-auto" th:text="${el.anons}"></p>
                         <br><table width="100%">

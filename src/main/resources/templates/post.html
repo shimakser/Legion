@@ -120,7 +120,7 @@
 
 <main class="container" th:each="el : ${post}">
     <div class="row">
-        <h3 class="mb-0" th:text="${el.title}"></h3><br>
+        <h3 class="mb-0" th:text="${el.title}"></h3><br><br>
         <p style="white-space: pre-wrap;" class="mb-auto" th:text="${el.mainText}"></p><br>
         <table width="100%">
             <tr>
@@ -131,7 +131,6 @@
             </tr>
         </table>
     </div>
-    <br>
     <p>
         <a class="btn btn-primary" th:href="'/main/' + ${el.id} + '/edit'" role="button">Редактировать</a>
         <form method="post" th:action="'/main/' + ${el.id} + '/delete'">

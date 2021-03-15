@@ -21,9 +21,19 @@ public class BlogController {
 
     @GetMapping("/main")
     public String mainPage(Model model) {
-        Iterable<Post> posts = postRepository.findAll();
+        Iterable<Post> posts = postRepository.findAllByOrderByIdDesc();
+        //Iterable<Post> mvp = postRepository.findTopByViews();
         model.addAttribute("posts", posts);
+        //model.addAttribute("mvp", mvp);
         return "main";
+    }
+
+    @PostMapping("/main")
+    public String searchByTitle(@RequestParam String title, Model model) {
+        Iterable<Post> posts = postRepository.findAllByTitle(title);
+        model.addAttribute("posts", posts);
+        model.addAttribute("titles", title);
+        return "search";
     }
 
     @GetMapping("/main/add")
@@ -37,14 +47,6 @@ public class BlogController {
         post.setCategory(Category.valueOf(category));
         postRepository.save(post);
         return "redirect:/main";
-    }
-
-    @GetMapping("/main/posts/{category}")
-    public String sordByCategory(@PathVariable(value = "category") String category, Model model) {
-        Iterable<Post> posts = postRepository.findAllByCategory(Category.valueOf(category));
-        model.addAttribute("posts", posts);
-        model.addAttribute("categories", category);
-        return "sort";
     }
 
     @GetMapping("/main/{id}")
@@ -91,6 +93,14 @@ public class BlogController {
         post.setAnons(anons);
         post.setMainText(mainText);
         postRepository.save(post);
-        return "redirect:/main";
+        return "redirect:/main/{id}";
+    }
+
+    @GetMapping("/main/posts/{category}")
+    public String sordByCategory(@PathVariable(value = "category") String category, Model model) {
+        Iterable<Post> posts = postRepository.findAllByCategory(Category.valueOf(category));
+        model.addAttribute("posts", posts);
+        model.addAttribute("categories", category);
+        return "sort";
     }
 }
