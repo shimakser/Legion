@@ -1,7 +1,7 @@
 package by.shimakser.controllers;
 
-import by.shimakser.models.Role;
-import by.shimakser.models.User;
+import by.shimakser.model.Role;
+import by.shimakser.model.User;
 import by.shimakser.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +30,7 @@ public class RegistrationController {
             model.put("message", "User exists!");
             return "registration";
         }
+        user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
         return "redirect:/login";

@@ -1,8 +1,6 @@
-package by.shimakser.models;
+package by.shimakser.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "Post")

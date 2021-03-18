@@ -76,15 +76,15 @@
   <form class="form-signin" th:action="@{/login}" method="post">
     <img class="mb-4" src="https://i.redd.it/fsal3ipywty21.png" width="200" height="200">
     <h1 class="h3 mb-3 font-weight-normal">Введите данные профиля</h1>
-    <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Логин" required=""
+    <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Логин"
            autofocus="">
-    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required="">
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль">
 
-    <div class="checkbox mb-3">
-      <label>
-        <a href="/registration">Регистрация</a>
-      </label>
+    <div class="btn-group">
+      <a type="button" class="btn btn-sm btn-outline-primary" href="/registration">Регистрация</a>
+      <a type="button" class="btn btn-sm btn-outline-primary" href="/">На главную</a>
     </div>
+    <br><br>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
   </form>
 </body>

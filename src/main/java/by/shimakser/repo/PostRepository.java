@@ -1,7 +1,7 @@
 package by.shimakser.repo;
 
-import by.shimakser.models.Category;
-import by.shimakser.models.Post;
+import by.shimakser.model.Category;
+import by.shimakser.model.Post;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

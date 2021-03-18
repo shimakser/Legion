@@ -1,7 +1,7 @@
 package by.shimakser.controllers;
 
-import by.shimakser.models.Category;
-import by.shimakser.models.Post;
+import by.shimakser.model.Category;
+import by.shimakser.model.Post;
 import by.shimakser.repo.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,7 @@ public class BlogController {
         Iterable<Post> posts = postRepository.findAllByTitle(title);
         model.addAttribute("posts", posts);
         model.addAttribute("titles", title);
-        return "search";
+        return "sort";
     }
 
     @GetMapping("/main/add")
@@ -97,10 +97,10 @@ public class BlogController {
     }
 
     @GetMapping("/main/posts/{category}")
-    public String sordByCategory(@PathVariable(value = "category") String category, Model model) {
+    public String sortByCategory(@PathVariable(value = "category") String category, Model model) {
         Iterable<Post> posts = postRepository.findAllByCategory(Category.valueOf(category));
         model.addAttribute("posts", posts);
-        model.addAttribute("categories", category);
+        model.addAttribute("titles", category);
         return "sort";
     }
 }
