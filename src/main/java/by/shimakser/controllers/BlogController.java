@@ -23,11 +23,13 @@ public class BlogController {
 
     @GetMapping("/main")
     public String mainPage(Principal user, Model model) {
-        Iterable<Post> posts = postRepository.findAllByOrderByIdDesc();
-        //Iterable<Post> mvp = postRepository.findTopByViews();
-        //model.addAttribute("mvp", mvp);
-        model.addAttribute("posts", posts);
         model.addAttribute("login", user.getName());
+        Iterable<Post> posts = postRepository.findAllByOrderByIdDesc();
+        model.addAttribute("posts", posts);
+        Post mostViewsPost = postRepository.findTopByOrderByViewsDesc();
+        model.addAttribute("mvp", mostViewsPost);
+        Post lastPost = postRepository.findTopByOrderByIdDesc();
+        model.addAttribute("lp", lastPost);
         return "main";
     }
 

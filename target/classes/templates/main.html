@@ -124,10 +124,12 @@
                 </svg>
 
                 <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Some representative placeholder content for the second slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    <div class="carousel-caption text-start" th:each="el:${mvp}">
+                        <h1><u>Самый просматриваемый пост</u></h1><br>
+                        <b><a class="d-inline-block mb-2 text-primary" th:text="${el.category}"></a></b>
+                        <h3 class="mb-0" th:text="${el.title}"></h3>
+                        <p class="card-text mb-auto" th:text="${el.anons}"></p><br>
+                        <p><a class="btn btn-lg btn-primary" th:href="'/main/' + ${el.id}">Подробнее</a></p>
                     </div>
                 </div>
             </div>
@@ -139,13 +141,14 @@
                 </svg>
 
                 <div class="container">
-                    <!--<div class="carousel-caption text-start" th:each="el:${mvp}">
-                        <h1><u>Самый просматриваемый пост</u></h1><br>
-                        <b><a class="d-inline-block mb-2 text-primary" th:text="${el.category}" th:text="${el.category}"></a></b>
-                        <h3 class="mb-0" th:text="${el.title}"></h3>
-                        <p class="card-text mb-auto" th:text="${el.anons}"></p>
-                        <p><a class="btn btn-lg btn-primary" th:href="'/main/' + ${el.id}">Подробнее</a></p>
-                    </div>-->
+                    <div class="carousel-caption">
+                        <h1><u>Task list:</u></h1>
+                            <p>- Добовление постов и редактирование.</p>
+                            <p>- Поиск постов по название и сортировка по категорям.</p>
+                            <p>- Авторизация и изменение никнейма пользователя.</p>
+                            <p>- Поиск первого по просмотрам.</p>
+                        <p><a class="btn btn-lg btn-primary" href="/">Legion</a></p>
+                    </div>
                 </div>
             </div>
 
@@ -156,10 +159,12 @@
                 </svg>
 
                 <div class="container">
-                    <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                    <div class="carousel-caption text-end" th:each="el:${lp}">
+                        <h1><u>Последний пост</u></h1><br>
+                        <b><a class="d-inline-block mb-2 text-primary" th:text="${el.category}"></a></b>
+                        <h3 class="mb-0" th:text="${el.title}"></h3>
+                        <p class="card-text mb-auto" th:text="${el.anons}"></p><br>
+                        <p><a class="btn btn-lg btn-primary" th:href="'/main/' + ${el.id}">Подробнее</a></p>
                     </div>
                 </div>
             </div>
