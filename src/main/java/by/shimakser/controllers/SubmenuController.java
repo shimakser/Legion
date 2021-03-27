@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.security.Principal;
 
 @Controller
 public class SubmenuController {
@@ -20,27 +18,24 @@ public class SubmenuController {
     private UserRepository userRepository;
 
     @GetMapping("/main/settings")
-    public String settingsPage(Model model) {
+    public String settingsPage(Principal user, Model model) {
+        model.addAttribute("login", user.getName());
         return "settings";
     }
 
-    @GetMapping("/main/{id}/profile")
-    public String profilePage(@PathVariable(value = "id") long id, Model model) {
-        if (!userRepository.existsById(id)) {
-            return "redirect:/main";
-        }
-        Optional<User> user = userRepository.findById(id);
-        ArrayList<User> res = new ArrayList<>();
-        user.ifPresent(res::add);
-        model.addAttribute("user", res);
+
+    @GetMapping("/main/profile")
+    public String profilePage(Model model, Principal user) {
+        model.addAttribute("login", user.getName());
         return "profile";
     }
 
-    @PostMapping("/main/{id}/profile")
-    public String updateProfile(@PathVariable(value = "id") long id, @RequestParam String username, Model model) {
-        User user = userRepository.findById(id).orElseThrow();
-        user.setUsername(username);
-        userRepository.save(user);
+    @PostMapping("/main/profile")
+    public String rename(Model model, Principal user, @RequestParam String username) {
+        User newUser = userRepository.findByUsername(user.getName());
+        newUser.setUsername(username);
+        userRepository.save(newUser);
+        model.addAttribute("login", newUser.getUsername());
         return "redirect:/main";
     }
 }

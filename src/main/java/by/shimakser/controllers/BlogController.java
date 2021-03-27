@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.*;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -20,24 +22,27 @@ public class BlogController {
     private PostRepository postRepository;
 
     @GetMapping("/main")
-    public String mainPage(Model model) {
+    public String mainPage(Principal user, Model model) {
         Iterable<Post> posts = postRepository.findAllByOrderByIdDesc();
         //Iterable<Post> mvp = postRepository.findTopByViews();
-        model.addAttribute("posts", posts);
         //model.addAttribute("mvp", mvp);
+        model.addAttribute("posts", posts);
+        model.addAttribute("login", user.getName());
         return "main";
     }
 
     @PostMapping("/main")
-    public String searchByTitle(@RequestParam String title, Model model) {
+    public String searchByTitle(@RequestParam String title, Principal user, Model model) {
         Iterable<Post> posts = postRepository.findAllByTitle(title);
         model.addAttribute("posts", posts);
         model.addAttribute("titles", title);
+        model.addAttribute("login", user.getName());
         return "sort";
     }
 
     @GetMapping("/main/add")
-    public String addingPage(Model model) {
+    public String addingPage(Principal user, Model model) {
+        model.addAttribute("login", user.getName());
         return "add";
     }
 
@@ -50,7 +55,7 @@ public class BlogController {
     }
 
     @GetMapping("/main/{id}")
-    public String fullPost(@PathVariable(value = "id") long id, Model model) {
+    public String fullPost(@PathVariable(value = "id") long id, Principal user, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/main";
         }
@@ -64,6 +69,7 @@ public class BlogController {
         post.ifPresent(res::add);
         model.addAttribute("post", res);
         model.addAttribute("title", post2.getTitle());
+        model.addAttribute("login", user.getName());
         return "post";
     }
 
@@ -75,7 +81,7 @@ public class BlogController {
     }
 
     @GetMapping("/main/{id}/edit")
-    public String postEdit(@PathVariable(value = "id") long id, Model model) {
+    public String postEdit(@PathVariable(value = "id") long id, Principal user, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/main";
         }
@@ -83,6 +89,7 @@ public class BlogController {
         ArrayList<Post> res = new ArrayList<>();
         post.ifPresent(res::add);
         model.addAttribute("post", res);
+        model.addAttribute("login", user.getName());
         return "edit";
     }
 
@@ -97,10 +104,11 @@ public class BlogController {
     }
 
     @GetMapping("/main/posts/{category}")
-    public String sortByCategory(@PathVariable(value = "category") String category, Model model) {
+    public String sortByCategory(@PathVariable(value = "category") String category, Principal user, Model model) {
         Iterable<Post> posts = postRepository.findAllByCategory(Category.valueOf(category));
         model.addAttribute("posts", posts);
         model.addAttribute("titles", category);
+        model.addAttribute("login", user.getName());
         return "sort";
     }
 }
