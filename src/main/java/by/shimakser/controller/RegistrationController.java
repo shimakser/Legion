@@ -1,7 +1,7 @@
-package by.shimakser.controllers;
+package by.shimakser.controller;
 
-import by.shimakser.model.Role;
-import by.shimakser.model.User;
+import by.shimakser.model.user.Role;
+import by.shimakser.model.user.User;
 import by.shimakser.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

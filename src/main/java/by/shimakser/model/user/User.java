@@ -1,4 +1,4 @@
-package by.shimakser.model;
+package by.shimakser.model.user;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -1,7 +1,7 @@
-package by.shimakser.controllers;
+package by.shimakser.controller;
 
-import by.shimakser.model.Category;
-import by.shimakser.model.Post;
+import by.shimakser.model.post.Category;
+import by.shimakser.model.post.Post;
 import by.shimakser.repo.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
