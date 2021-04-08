@@ -6,10 +6,7 @@ import by.shimakser.repo.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -21,9 +18,13 @@ public class BlogController {
     @Autowired
     private PostRepository postRepository;
 
+    @ModelAttribute("login")
+    public String activeUser(Principal user) {
+        return user.getName();
+    }
+
     @GetMapping("/main")
-    public String mainPage(Principal user, Model model) {
-        model.addAttribute("login", user.getName());
+    public String mainPage(Model model) {
         Iterable<Post> posts = postRepository.findAllByOrderByIdDesc();
         model.addAttribute("posts", posts);
         Post mostViewsPost = postRepository.findTopByOrderByViewsDesc();
@@ -34,30 +35,29 @@ public class BlogController {
     }
 
     @PostMapping("/main")
-    public String searchByTitle(@RequestParam String title, Principal user, Model model) {
+    public String searchByTitle(@RequestParam String title, Model model) {
         Iterable<Post> posts = postRepository.findAllByTitle(title);
         model.addAttribute("posts", posts);
         model.addAttribute("titles", title);
-        model.addAttribute("login", user.getName());
         return "sort";
     }
 
     @GetMapping("/main/add")
-    public String addingPage(Principal user, Model model) {
-        model.addAttribute("login", user.getName());
+    public String addingPage(Model model) {
         return "add";
     }
 
     @PostMapping("/main/add")
-    public String postAdd(@RequestParam String category, @RequestParam String title, @RequestParam String anons, @RequestParam String mainText, Model model) {
-        Post post = new Post(title, anons, mainText);
+    public String postAdd(Principal user, @RequestParam String category, @RequestParam String title,
+                          @RequestParam String anons, @RequestParam String mainText, Model model) {
+        Post post = new Post(title, anons, mainText, user.getName());
         post.setCategory(Category.valueOf(category));
         postRepository.save(post);
         return "redirect:/main";
     }
 
     @GetMapping("/main/{id}")
-    public String fullPost(@PathVariable(value = "id") long id, Principal user, Model model) {
+    public String fullPost(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/main";
         }
@@ -71,7 +71,6 @@ public class BlogController {
         post.ifPresent(res::add);
         model.addAttribute("post", res);
         model.addAttribute("title", post2.getTitle());
-        model.addAttribute("login", user.getName());
         return "post";
     }
 
@@ -83,7 +82,7 @@ public class BlogController {
     }
 
     @GetMapping("/main/{id}/edit")
-    public String postEdit(@PathVariable(value = "id") long id, Principal user, Model model) {
+    public String postEdit(@PathVariable(value = "id") long id, Model model) {
         if (!postRepository.existsById(id)) {
             return "redirect:/main";
         }
@@ -91,7 +90,6 @@ public class BlogController {
         ArrayList<Post> res = new ArrayList<>();
         post.ifPresent(res::add);
         model.addAttribute("post", res);
-        model.addAttribute("login", user.getName());
         return "edit";
     }
 
@@ -106,11 +104,10 @@ public class BlogController {
     }
 
     @GetMapping("/main/posts/{category}")
-    public String sortByCategory(@PathVariable(value = "category") String category, Principal user, Model model) {
+    public String sortByCategory(@PathVariable(value = "category") String category, Model model) {
         Iterable<Post> posts = postRepository.findAllByCategory(Category.valueOf(category));
         model.addAttribute("posts", posts);
         model.addAttribute("titles", category);
-        model.addAttribute("login", user.getName());
         return "sort";
     }
 }

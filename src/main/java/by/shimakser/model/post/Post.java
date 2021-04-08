@@ -13,6 +13,7 @@ public class Post {
     private String anons;
     private String mainText;
     private int views;
+    private String author;
 
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
@@ -21,17 +22,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String anons, String mainText) {
+    public Post(String title, String anons, String mainText, String author) {
         this.title = title;
         this.anons = anons;
         this.mainText = mainText;
-    }
-
-    public Post(Category category, String title, String anons, String mainText) {
-        this.category = category;
-        this.title = title;
-        this.anons = anons;
-        this.mainText = mainText;
+        this.author = author;
     }
 
     public Long getId() {
@@ -80,6 +75,14 @@ public class Post {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
 
