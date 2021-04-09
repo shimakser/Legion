@@ -11,6 +11,9 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <style type="text/css">
+        .blok {
+            display:none;
+        }
         .blog-header {
             line-height: 1;
             border-bottom: 1px solid #e5e5e5;
@@ -55,9 +58,9 @@
             </tr>
         </table>
     </div>
-    <p>
+    <p th:class="${class}">
         <a class="btn btn-primary" th:href="'/main/' + ${el.id} + '/edit'" role="button">Редактировать</a>
-        <form method="post" th:action="'/main/' + ${el.id} + '/delete'">
+        <form th:class="${class}" method="post" th:action="'/main/' + ${el.id} + '/delete'">
             <button class="btn btn-primary" role="button" type="submit">Удалить</button>
         </form>
     </p>
