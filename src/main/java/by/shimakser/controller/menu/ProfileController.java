@@ -1,7 +1,8 @@
-package by.shimakser.controller;
+package by.shimakser.controller.menu;
 
 import by.shimakser.model.user.User;
 import by.shimakser.repo.UserRepository;
+import by.shimakser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,32 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 
 @Controller
-public class SubmenuController {
+public class ProfileController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @ModelAttribute("login")
-    public String activeUser(Principal user) {
-        return user.getName();
-    }
-
-    @GetMapping("/main/settings")
-    public String settingsPage(Model model) {
-        return "settings";
-    }
+    private UserService userService;
 
     @GetMapping("/main/profile")
-    public String profilePage(Model model) {
+    public String profilePage(Principal user, Model model) {
+        model.addAttribute("login", user.getName());
         return "profile";
     }
 
     @PostMapping("/main/profile")
-    public String rename(Model model, Principal user, @RequestParam String username) {
-        User newUser = userRepository.findByUsername(user.getName());
-        newUser.setUsername(username);
-        userRepository.save(newUser);
-        model.addAttribute("login", newUser.getUsername());
+    public String renameUser(Model model, Principal user, @RequestParam String username) {
+        userService.rename(model, user, username);
         return "redirect:/main";
     }
 }

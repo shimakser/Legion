@@ -43,7 +43,7 @@
             <h1 class="display-4 font-weight-bold" align="center">Редактирование поста</h1>
             <hr style="background-color: white;">
             <div th:each="el : ${post}">
-                <form align="center" method="post">
+                <form align="center" th:action="'/main/' + ${el.id} + '/edit'" method="post">
                     <input type="text" th:value="${el.title}" name="title" placeholder="Название поста" class="form-control"><br>
                     <input type="text" th:value="${el.anons}" name="anons" placeholder="Анонс" class="form-control"><br>
                     <textarea type="text" name="mainText" placeholder="Текст поста" class="form-control" th:text="${el.mainText}" />
