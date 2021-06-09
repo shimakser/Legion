@@ -1,7 +1,12 @@
 package by.shimakser.model.post;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Post")
 public class Post {
@@ -26,62 +31,6 @@ public class Post {
         this.title = title;
         this.anons = anons;
         this.mainText = mainText;
-        this.author = author;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAnons() {
-        return anons;
-    }
-
-    public void setAnons(String anons) {
-        this.anons = anons;
-    }
-
-    public String getMainText() {
-        return mainText;
-    }
-
-    public void setMainText(String mainText) {
-        this.mainText = mainText;
-    }
-
-    public int getViews() {
-        return views;
-    }
-
-    public void setViews(int views) {
-        this.views = views;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
         this.author = author;
     }
 }

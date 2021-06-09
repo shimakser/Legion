@@ -1,7 +1,5 @@
 package by.shimakser.repo;
 
-
-import by.shimakser.model.user.Role;
 import by.shimakser.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
