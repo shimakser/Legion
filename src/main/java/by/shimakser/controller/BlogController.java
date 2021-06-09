@@ -19,8 +19,12 @@ import java.util.Set;
 @Controller
 public class BlogController {
 
-    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    public BlogController(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @ModelAttribute("login")
     public String activeUser(Principal user) {

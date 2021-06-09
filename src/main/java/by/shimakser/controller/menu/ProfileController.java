@@ -16,8 +16,12 @@ import java.security.Principal;
 @Controller
 public class ProfileController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public ProfileController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/main/profile")
     public String profilePage(Principal user, Model model) {

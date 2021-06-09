@@ -11,8 +11,13 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/main/{id}/edit")
 public class EditController {
-    @Autowired
+
     private PostService postService;
+
+    @Autowired
+    public EditController(PostService postService) {
+        this.postService = postService;
+    }
 
     @ModelAttribute("login")
     public String activeUser(Principal user) {

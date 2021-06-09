@@ -15,10 +15,15 @@ import java.util.Set;
 
 @Service
 public class PostService {
-    @Autowired
+
     private PostRepository postRepository;
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public PostService(PostRepository postRepository, UserRepository userRepository) {
+        this.postRepository = postRepository;
+        this.userRepository = userRepository;
+    }
 
     public boolean displayFullPost(long id, Principal user, Model model) {
         if (!postRepository.existsById(id)) {

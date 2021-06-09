@@ -12,8 +12,12 @@ import java.security.Principal;
 @Controller
 public class PostController {
 
-    @Autowired
     private PostService postService;
+
+    @Autowired
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/main/{id}")
     public String fullPost(@PathVariable(value = "id") long id, Principal user, Model model) {

@@ -14,8 +14,12 @@ import java.security.Principal;
 @RequestMapping("/main/add")
 public class AdditionController {
 
-    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    public AdditionController(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @ModelAttribute("login")
     public String activeUser(Principal user) {

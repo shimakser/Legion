@@ -12,8 +12,13 @@ import java.util.Collections;
 
 @Service
 public class UserService {
-    @Autowired
+
     private UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public boolean addUser(User user) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
